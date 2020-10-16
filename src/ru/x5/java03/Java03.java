@@ -18,16 +18,16 @@ public class Java03 {
         // Вызвать метод getScholarship() для каждого элемента массива
 
         Student student = new Aspirant("Vasya", "Ivanov");
-
         Student[] students = new Student[15];
         for (int i = 0; i < 15; i++) {
-
+            // Каждого нечетного делаю Студентом, остальных - Аспирантами
             if ((i % 2) == 0) {
                 students[i] = new Aspirant("N" + (i + 1), "S" + (i + 1));
             } else {
                 students[i] = new Student("N" + (i + 1), "S" + (i + 1));
             }
 
+            //Каждый третий получает максимальный средний балл и стипендию, остальные - ниже балл и стипендию.
             if ((i % 3) == 0) {
                 students[i].setAverageMark(5.0);
             } else {
