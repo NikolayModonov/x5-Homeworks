@@ -6,10 +6,8 @@ import java.util.Scanner;
 public class Java02 {
 
     public static void main(String[] args) {
-        int mainInt = 456;
-
+        int mainInt;
         int tempInt;
-        boolean flagBool = true;
         //String mainString;
 
         System.out.println("Урок 2.");
@@ -18,20 +16,17 @@ public class Java02 {
 
         // Задание 1. Последняя цифра введенного числа.
         System.out.print("Задание 1. Последняя цифра числа: ");
-        if (mainInt > 0) {
-            System.out.println(mainInt % 10);
-        } else {
-            System.out.println(-1 * mainInt % 10);
-        }
+        System.out.println(Math.abs(mainInt) % 10);
 
         // Задание 2. Сумма цифр трехзначного числа
         System.out.print("Задание 2. ");
-        tempInt = mainInt;
-        if (tempInt < 0) {
-            tempInt *= -1;
-        }
-        if ((tempInt > 99) && (tempInt < 1000)) {
-            System.out.println("Сумма цифр трехзначного числа: " + ((tempInt % 10) + ((tempInt % 100) / 10) + ((tempInt % 1000) / 100)));
+        tempInt = 0;
+        if ((Math.abs(mainInt) > 99) && (Math.abs(mainInt) < 1000)) {
+            System.out.print("Сумма цифр трехзначного числа: ");
+            for (int i = 1; i < 4; i++) {
+                tempInt += ((Math.abs(mainInt) % Math.pow(10, i )) / Math.pow(10, i - 1));
+            }
+            System.out.println(tempInt);
         } else {
             System.out.println("Заданное число не трехзначное");
         }
@@ -57,7 +52,7 @@ public class Java02 {
 
         // Задание 5. Меньшее из трех чисел
         System.out.println("Задание 5. Поиск наименьшего из трех чисел.");
-        mainInt = 2_147_483_647;
+        mainInt = Integer.MAX_VALUE;
         for (int i = 0; i < 3; i++) {
             System.out.print((i + 1) + ": ");
             tempInt = inputInteger();
@@ -67,6 +62,28 @@ public class Java02 {
         System.out.println("Меньшее из введенных чисел: " + mainInt);
 
 
+        //6. Ввести целое число в консоли. Вывести его строку - описание вида
+        // «отрицательное четное число» «нулевое число», «положительное нечетное число»
+        // т. д.
+        System.out.println("Задание 6. Характеристика числа.");
+        mainInt = inputInteger();
+        if (mainInt > 0) {
+            System.out.print("Положительное ");
+        } else if (mainInt < 0) {
+            System.out.print("Отрицательное ");
+        } else {
+            System.out.print("Нулевое ");
+        }
+        if (mainInt != 0) {
+            if ((mainInt % 2) == 1){
+                System.out.print("не");
+            }
+            System.out.print("четное ");
+        }
+        System.out.println("число");
+
+
+
         // Задание 7. Стоимость 10 мин разговора по коду города.
         // Москва(905) - 4.15руб. Ростов(194) - 1.98руб.
         // Краснодар(491) - 2.69руб. Киров(800) - 5.00 руб.
@@ -74,30 +91,19 @@ public class Java02 {
         // «Москва. Стоимость разговора: 41.5»
 
         // Обнуляю флаг выхода из цикла
-        flagBool = true;
+        String[] citiesNames = new String[]{"Москва", "Ростов", "Краснодар", "Киров"};
+        int[] citiesPhoneCodes = new int[]{905, 194, 491, 800};
+        double[] costOfOneMinuteCall = new double[]{4.15, 1.98, 2.69, 5.00};
 
         System.out.println("Задание 7. Вычисление стоимости звонка.");
-        while (flagBool) {
-            System.out.println("Необходимо ввести код города. В базе заведены коды: 905, 194, 491, 800.");
-            mainInt = inputInteger();
-            flagBool = false;
-            switch (mainInt) {
-                case 905:
-                    System.out.println("Код города Москва. Стоимость 10 минут разговора: " + (415 * 10 / 100) + "." + ((415 * 10) % 100));
-                    break;
-                case 194:
-                    System.out.println("Код города Ростов. Стоимость 10 минут разговора: " + (198 * 10 / 100) + "." + ((198 * 10) % 100));
-                    break;
-                case 491:
-                    System.out.println("Код города Краснодар. Стоимость 10 минут разговора: " + (269 * 10 / 100) + "." + ((269 * 10) % 100));
-                    break;
-                case 800:
-                    System.out.println("Код города Киров. Стоимость 10 минут разговора: " + (500 * 10 / 100) + "." + ((500 * 10) % 100));
-                    break;
-                default:
-                    flagBool = true;
-                    System.out.println("Код города не распознан. Система работает только с известными кодами городов.");
-                    break;
+        System.out.println("Необходимо ввести код города. В базе заведены коды: 905, 194, 491, 800.");
+        mainInt = inputInteger();
+        for (int i = 0; i < 4; i++) {
+            if (mainInt == citiesPhoneCodes[i]) {
+                System.out.println("Код города " + citiesNames[i] + ". Стоимость 10 минут разговора: " + String.format("%.2f", (10 * costOfOneMinuteCall[i])));
+                break;
+            } else if (i == 3) {
+                System.out.println("Код города не распознан. Система работает только с известными кодами городов.");
             }
         }
 
@@ -142,10 +148,7 @@ public class Java02 {
         int[] arrayTask9 = {15, 10, 51, -6, -5, 3, -10, -34, 0, 32, 56, -12, 24, -52};
         System.out.println("Задание 9. Переставить элементы массива в обратном порядке.");
         System.out.println("Исходный массив:        " + Arrays.toString(arrayTask9));
-//        System.out.println(arrayTask9.length);
-//        System.out.println(arrayTask9.length / 2);
         for (int i = 0; i < (arrayTask9.length / 2); i++) {
-//            System.out.print(i + " " + (arrayTask9.length - i) + " _ ");
             tempInt = arrayTask9[i];
             arrayTask9[i] = arrayTask9[arrayTask9.length - i - 1];
             arrayTask9[arrayTask9.length - i - 1] = tempInt;
@@ -160,9 +163,7 @@ public class Java02 {
         System.out.println("Исходный массив:        " + Arrays.toString(arrayTask10));
         for (int i = 0; i < arrayTask10.length; i++) {
             if (arrayTask10[i] == 0) {
-                for (int j = i; j < (arrayTask10.length - 1); j++) {
-                    arrayTask10[j] = arrayTask10[j + 1];
-                }
+                System.arraycopy(arrayTask10, i + 1, arrayTask10, i, (arrayTask10.length - 1 - i));
                 arrayTask10[arrayTask10.length - 1] = 0;
             }
         }
@@ -172,7 +173,7 @@ public class Java02 {
     }
 
     // Ввод данных с клавиатуры и проверка на Integer
-    public static Integer inputInteger() {
+    public static int inputInteger() {
         Scanner scanInteger = new Scanner(System.in);
         System.out.print("Введите целое число: ");
         while (!scanInteger.hasNextInt()) {
@@ -181,9 +182,9 @@ public class Java02 {
             System.out.print("Введите целое число: ");
             scanInteger.nextLine();
         }
-        ;
         return scanInteger.nextInt();
     }
+
 }
 
 
