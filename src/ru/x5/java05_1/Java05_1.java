@@ -20,17 +20,27 @@
 package ru.x5.java05_1;
 
 public class Java05_1 {
-    public static void main (String[]args){
-        System.out.println ("Logger Fabric Soft");
-        //Scanner scanner = new Scanner(System.in)
+    public static void main(String[] args) {
+
+        int operand1 = 18, operand2 = 28;
+        System.out.println("Logger Fabric Soft");
+        Calculator calculator = new Calculator();
         LoggerFactory factory = new LoggerFactory();
+
         Logger jLogger = factory.getLogger(LoggerType.CONSOLELOGGER);
         jLogger.log("console message");
+        calculator.Addition(operand1, operand2, jLogger);
+        calculator.Subtraction(operand1, operand2, jLogger);
+        calculator.Multiplication(operand1, operand2, jLogger);
+        calculator.Division(operand1, operand2, jLogger);
+
         jLogger = factory.getLogger(LoggerType.FILELOGGER);
         jLogger.log("file message");
+        calculator.Addition(operand1, operand2, jLogger);
+
         jLogger = factory.getLogger(LoggerType.DBLOGGER);
         jLogger.log("DB message");
-
+        calculator.Addition(operand1, operand2, jLogger);
     }
 }
 
