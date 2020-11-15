@@ -22,4 +22,9 @@
 package ru.x5.java05_2;
 
 public class Java05_2 {
+    public static void main(String[] args) {
+        RAM ram = new RAM();
+        ram.brand = RamBrand.KINGSTON;
+        System.out.println(ram.brand);
+    }
 }
