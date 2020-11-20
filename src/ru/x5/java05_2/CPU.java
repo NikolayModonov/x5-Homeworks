@@ -5,5 +5,9 @@
 
 package ru.x5.java05_2;
 
-public class CPU {
+public class CPU extends Device{
+    Brands brand;
+    int numberOfCores;
+    int cashe;
+    CPUModel cpuModel;
 }

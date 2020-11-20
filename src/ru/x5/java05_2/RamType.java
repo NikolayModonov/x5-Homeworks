@@ -5,5 +5,9 @@ public enum RamType {
     DDR2,
     DDR3,
     DDR3L,
-    DDR4
+    DDR4,
+    GDDR2,
+    GDDR3,
+    GDDR4,
+    GDDR5
 }

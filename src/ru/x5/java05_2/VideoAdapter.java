@@ -5,5 +5,9 @@
 
 package ru.x5.java05_2;
 
-public class VideoAdapter {
+public class VideoAdapter extends Device {
+    Brands brand;
+    RamType ramType;
+    int ramCapacity;
+    boolean activeCooler;
 }
